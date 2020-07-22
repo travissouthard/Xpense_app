@@ -16,7 +16,7 @@ mongoose.connection.once('open', ()=>{
 //middleware
 app.use(express.json())
 
-const whitelist = ['http://localhost:300']
+const whitelist = ['http://localhost:3000']
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) >= 0) {
