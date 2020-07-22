@@ -32,7 +32,7 @@ budgets.put("/:id", (req, res) => {
     });
 });
 
-budgets.delete("/:id", (res, res) => {
+budgets.delete("/:id", (req, res) => {
     Budget.findByIdAndDelete(req.params.id, (err, deletedBudget) => {
         if (err) {
             res.status(400).json({"Error": err.message});
