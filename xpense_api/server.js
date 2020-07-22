@@ -16,6 +16,7 @@ mongoose.connection.once('open', ()=>{
     console.log('connected to mongoose...')
 })
 
-  app.listen(3000, ()=> {
+
+app.listen(3000, ()=> {
     console.log("I am listening for requests!!!");
   });
