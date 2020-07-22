@@ -29,7 +29,7 @@ budgets.put("/:id", (req, res) => {
             res.status(400).json({"Error": err.message});
         }
         res.status(200).json(updatedBudget);
-    })
+    });
 });
 
 budgets.delete("/:id", (res, res) => {
@@ -38,8 +38,8 @@ budgets.delete("/:id", (res, res) => {
             res.status(400).json({"Error": err.message});
         }
         res.status(200).json(deletedBudget);
-    })
-})
+    });
+});
 
 //EXPORTS
 module.exports = budgets
