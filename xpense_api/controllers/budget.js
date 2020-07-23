@@ -16,49 +16,17 @@ budgets.get("/", (req, res) => {
 });
 
 budgets.get("/seed", (req, res) => {
-    Budget.create(
-        [{
-            title: "Gas",
-            budget: 10,
-            spent: 6,
-            transactions: [],
-        },
-        {
-            title: "Food",
+    let categoryNames = ["Gas", "Food", "Lodging", "Entertainment", "Shopping", "Car rental", "Misc.",];
+    let categories = [];
+    categoryNames.map((name) => {
+        categories.push({
+            title: name,
             budget: 0,
             spent: 0,
             transactions: [],
-        },
-        {
-            title: "Lodging",
-            budget: 0,
-            spent: 0,
-            transactions: [],
-        },
-        {
-            title: "Entertainment",
-            budget: 0,
-            spent: 0,
-            transactions: [],
-        },
-        {
-            title: "Shopping",
-            budget: 0,
-            spent: 0,
-            transactions: [],
-        },
-        {
-            title: "Car rental",
-            budget: 0,
-            spent: 0,
-            transactions: [],
-        },
-        {
-            title: "Misc.",
-            budget: 0,
-            spent: 0,
-            transactions: [],
-        }], (err, seededBudget) => {
+        });
+    });
+    Budget.create(categories, (err, seededBudget) => {
         if (err) {
             res.status(400).json({"Error": err.message});
         }
