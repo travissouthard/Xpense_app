@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const cors = require('cors')
 const app = express();
+const PORT = process.env.PORT || 3000
 
-const PORT = process.env.PORT
 const mongodbURI = process.env.MONGODBURI
 console.log(mongodbURI)
 require('dotenv').config()
@@ -14,7 +14,7 @@ mongoose.connection.on('error', err => console.log(err.message + ' is Mongod not
 mongoose.connection.on('disconnected', () => console.log('mongo disconnected'))
 
 //Database Connection
-mongoose.connect('mongodb://localhost:27017/xpense', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/xpense', { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connection.once('open', ()=>{
     console.log('connected to mongoose...')
 })
@@ -46,7 +46,7 @@ const budgetsController = require("./controllers/budget.js");
 app.use("/budgets", budgetsController);
 
 const userController = require('./controllers/user.js')
-app.use('/users', userController)
+app.use('/user', userController)
 
 
 app.get('/', (req, res) => {
