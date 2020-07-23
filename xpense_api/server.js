@@ -45,7 +45,7 @@ app.use(cors(corsOptions))
 const budgetsController = require("./controllers/budget.js");
 app.use("/budgets", budgetsController);
 
-const userController = require('./constrollers/users.js')
+const userController = require('./controllers/user.js')
 app.use('/users', userController)
 
 
