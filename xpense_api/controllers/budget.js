@@ -3,6 +3,7 @@ const express = require("express");
 const budgets = express.Router();
 
 const Budget = require("../models/budget.js")
+const budgetSeed = require("../models/budget_seed.js")
 
 //ROUTES
 budgets.get("/", (req, res) => {
@@ -13,6 +14,17 @@ budgets.get("/", (req, res) => {
         res.status(200).json(foundBudgets);
     });
 });
+
+budgets.get("/seed/:id", (req, res) => {
+    console.log("This route is working")
+    budgetSeed.userId = req.params.id;
+    Budget.create(budgetseed, (err, seededBudget) => {
+        if (err) {
+            res.status(400).json({"Error": err.message});
+        }
+        res.status(200).json(seededBudget)
+    })
+})
 
 budgets.post("/", (req, res) => {
     Budget.create(req.body, (err, createdBudget) => {

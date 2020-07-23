@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const cors = require('cors')
 const app = express();
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3003
 
 const mongodbURI = process.env.MONGODBURI
 console.log(mongodbURI)
@@ -55,5 +55,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, ()=> {
-    console.log("I am listening for requests!!!");
+    console.log("I am listening for requests at port:", PORT);
   });
