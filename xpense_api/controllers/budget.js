@@ -16,6 +16,7 @@ budgets.get("/", (req, res) => {
 });
 
 budgets.get("/seed/:id", (req, res) => {
+    console.log("This route is working")
     budgetSeed.userId = req.params.id;
     Budget.create(budgetseed, (err, seededBudget) => {
         if (err) {
