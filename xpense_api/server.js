@@ -3,6 +3,11 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express();
 
+const PORT = process.env.PORT
+const mongodbURI = process.env.MONGODBURI
+console.log(mongodbURI)
+require('dotenv').config()
+
 // Error / Disconnection
 mongoose.connection.on('error', err => console.log(err.message + ' is Mongod not running?'))
 mongoose.connection.on('disconnected', () => console.log('mongo disconnected'))
