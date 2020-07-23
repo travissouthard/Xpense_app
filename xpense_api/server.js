@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose')
+const session = require('express-session')
 const cors = require('cors')
 const app = express();
 
@@ -20,7 +21,13 @@ mongoose.connection.once('open', ()=>{
 
 //middleware
 app.use(express.json())
-
+app.use(
+  session({
+    secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
+    resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
+    saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
+  })
+)
 const whitelist = ['http://localhost:3000']
 const corsOptions = {
   origin: function (origin, callback) {
@@ -38,11 +45,15 @@ app.use(cors(corsOptions))
 const budgetsController = require("./controllers/budget.js");
 app.use("/budgets", budgetsController);
 
+const userController = require('./constrollers/users.js')
+app.use('/users', userController)
+
+
 app.get('/', (req, res) => {
   console.log("Oh hey! I got a request. Let me respond with something");
   res.redirect('/budgets');
 });
 
-app.listen(3000, ()=> {
+app.listen(PORT, ()=> {
     console.log("I am listening for requests!!!");
   });
