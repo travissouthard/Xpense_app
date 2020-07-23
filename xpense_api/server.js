@@ -4,7 +4,7 @@ const session = require('express-session')
 const cors = require('cors')
 const app = express();
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3003
 const mongodbURI = process.env.MONGODBURI
 console.log(mongodbURI)
 require('dotenv').config()
@@ -28,18 +28,17 @@ app.use(
     saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
   })
 )
-const whitelist = ['http://localhost:3000']
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) >= 0) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-
-app.use(cors(corsOptions))
+// const whitelist = ['http://localhost:3000']
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) >= 0) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
+// app.use(cors(corsOptions))
 
 //Controller/Routes
 const budgetsController = require("./controllers/budget.js");

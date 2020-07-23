@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const budgetSchema = mongoose.Schema({
-    title: {type: String, required: true},
+    title: {type: String, default: "Unnamed"},
     budget: {type: Number, default: 0},
     spent: {type: Number, default: 0},
     transactions: [{type: String}],

@@ -15,10 +15,50 @@ budgets.get("/", (req, res) => {
     });
 });
 
-budgets.get("/seed/:id", (req, res) => {
-    console.log("This route is working")
-    budgetSeed.userId = req.params.id;
-    Budget.create(budgetseed, (err, seededBudget) => {
+budgets.get("/seed", (req, res) => {
+    Budget.create(
+        [{
+            title: "Gas",
+            budget: 10,
+            spent: 6,
+            transactions: [],
+        },
+        {
+            title: "Food",
+            budget: 0,
+            spent: 0,
+            transactions: [],
+        },
+        {
+            title: "Lodging",
+            budget: 0,
+            spent: 0,
+            transactions: [],
+        },
+        {
+            title: "Entertainment",
+            budget: 0,
+            spent: 0,
+            transactions: [],
+        },
+        {
+            title: "Shopping",
+            budget: 0,
+            spent: 0,
+            transactions: [],
+        },
+        {
+            title: "Car rental",
+            budget: 0,
+            spent: 0,
+            transactions: [],
+        },
+        {
+            title: "Misc.",
+            budget: 0,
+            spent: 0,
+            transactions: [],
+        }], (err, seededBudget) => {
         if (err) {
             res.status(400).json({"Error": err.message});
         }
