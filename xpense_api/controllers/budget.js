@@ -3,7 +3,7 @@ const express = require("express");
 const budgets = express.Router();
 
 const Budget = require("../models/budget.js")
-const budgetSeed = require("../models/budget_seed.js")
+// const budgetSeed = require("../models/budget_seed.js")
 
 //ROUTES
 budgets.get("/", (req, res) => {
