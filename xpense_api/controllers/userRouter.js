@@ -116,3 +116,5 @@ router.delete("/delete", auth, async (req, res) => {
   });
 
 module.exports = user
+
+//worked through MERN auth tutorial on https://youtu.be/BKiiXXVb69Y and https://github.com/jgbijlsma/mern-auth-template-back/blob/master/routes/userRouter.js
