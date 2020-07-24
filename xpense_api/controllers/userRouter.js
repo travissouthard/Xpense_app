@@ -65,10 +65,14 @@ user.post('/login', async (req, res) => {
 
     const user = await User.findOne({ email: email })
     if (!user)
-    return res.status(400).json({ msg: "No account with this email exists."})
+    return res.status(400).json({ 
+        msg: "No account with this email exists."
+    })
 
     const passwordMatch = await bcrypt.compare(password, user.password)
-    if (!passwordMatch) return res.status(400).json({ msg: "Invalid password."})
+    if (!passwordMatch) return res.status(400).json({ 
+        msg: "Invalid password."
+    })
 
     const token = jwt.sign({ id: user._id}, process.env.JWT_SECRET)
     res.json({ 
