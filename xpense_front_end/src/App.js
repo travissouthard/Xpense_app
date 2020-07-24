@@ -1,6 +1,7 @@
 import React from 'react';
 
 import BudgetTable from './components/BudgetTable'
+import TransactionForm from './components/TransactionForm';
 
 
 
@@ -41,6 +42,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <h1>Xpense App</h1>
+        <TransactionForm budget={this.state.budget}/>
         <BudgetTable budget={this.state.budget} />
       </div>
     )
