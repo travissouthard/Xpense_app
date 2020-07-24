@@ -14,7 +14,7 @@ mongoose.connection.on('error', err => console.log(err.message + ' is Mongod not
 mongoose.connection.on('disconnected', () => console.log('mongo disconnected'))
 
 //Database Connection
-mongoose.connect('mongodb://localhost:27017/xpense', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/xpense', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true,})
 mongoose.connection.once('open', ()=>{
     console.log('connected to mongoose...')
 })
@@ -23,7 +23,7 @@ mongoose.connection.once('open', ()=>{
 app.use(express.json())
 app.use(
   session({
-    secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
+    secret: process.env.JWT_SECRET, //a random string do not copy this value or your stuff will get hacked
     resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
     saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
   })
