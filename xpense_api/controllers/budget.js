@@ -43,8 +43,8 @@ budgets.post("/", (req, res) => {
     });
 });
 
-budgets.put("/:id", (req, res) => {
-    Budget.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedBudget) => {
+budgets.put("/:category", (req, res) => {
+    Budget.findOneAndUpdate({category: req.params.category}, req.body, {new: true}, (err, updatedBudget) => {
         if (err) {
             res.status(400).json({"Error": err.message});
         }
