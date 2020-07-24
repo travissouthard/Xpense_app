@@ -16,7 +16,7 @@ class BudgetTable extends Component {
         <tbody>
         {  this.props.budget.map((budget, index )=> {
             return (
-                <BudgetRow title={budget.title} budget={budget.budget} spent={budget.spent}/>
+                <BudgetRow key={index} title={budget.title} budget={budget.budget} spent={budget.spent}/>
             )
           })}
         </tbody>
