@@ -3,7 +3,7 @@ const express = require("express");
 const budgets = express.Router();
 
 const Budget = require("../models/budget.js")
-const budgetSeed = require("../models/budget_seed.js")
+// const budgetSeed = require("../models/budget_seed.js")
 
 //ROUTES
 budgets.get("/", (req, res) => {
@@ -15,10 +15,18 @@ budgets.get("/", (req, res) => {
     });
 });
 
-budgets.get("/seed/:id", (req, res) => {
-    console.log("This route is working")
-    budgetSeed.userId = req.params.id;
-    Budget.create(budgetseed, (err, seededBudget) => {
+budgets.get("/seed", (req, res) => {
+    let categoryNames = ["Gas", "Food", "Lodging", "Entertainment", "Shopping", "Car rental", "Misc.",];
+    let categories = [];
+    categoryNames.map((name) => {
+        categories.push({
+            title: name,
+            budget: 0,
+            spent: 0,
+            transactions: [],
+        });
+    });
+    Budget.create(categories, (err, seededBudget) => {
         if (err) {
             res.status(400).json({"Error": err.message});
         }

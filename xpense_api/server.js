@@ -38,7 +38,6 @@ const corsOptions = {
     }
   }
 }
-
 app.use(cors(corsOptions))
 
 //Controller/Routes
