@@ -4,7 +4,7 @@ import BudgetTable from './components/BudgetTable'
 
 
 
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'http://localhost:3003';
 //TODO setup env file for front end
 // let baseUrl;
 // if (process.env.NODE_ENV === 'development') {
