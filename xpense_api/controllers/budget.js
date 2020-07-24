@@ -43,8 +43,15 @@ budgets.post("/", (req, res) => {
     });
 });
 
+//Add transaction route
 budgets.put("/:category", (req, res) => {
-    Budget.findOneAndUpdate({category: req.params.category}, req.body, {new: true}, (err, updatedBudget) => {
+    let transactions = [];
+    transactions.push(req.body)
+    Budget.findOneAndUpdate(
+        {title: req.params.category}, 
+        {$set: {transactions: transactions}}, 
+        {new: true}, 
+        (err, updatedBudget) => {
         if (err) {
             res.status(400).json({"Error": err.message});
         }
