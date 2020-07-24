@@ -48,7 +48,7 @@ app.use(
 const budgetsController = require("./controllers/budget.js");
 app.use("/budgets", budgetsController);
 
-const userController = require('./controllers/user.js')
+const userController = require('./controllers/userRouter.js')
 app.use('/user', userController)
 
 

@@ -6,6 +6,7 @@
 // }
 
 const express = require("express");
+const bcrypt = require("bcrypt")
 const user = express.Router();
 const jwt = require("jsonwebtoken")
 const auth = require("../middleware/user_auth.js")
@@ -28,13 +29,13 @@ user.post('/register', async (req, res) => {
                 msg: "Choose a password that is at least 7 characters long."
                 })
 
-        const createdUser = await User.findone({ email: email })
-        if (createdUser)
+        const createdEmail = await User.findOne({ email: email })
+        if (createdEmail)
             return res.status(400).json({
                 msg: "Sorry, email already exists."
             })
 
-        const createdUser = await User.findone({ email: email })
+        const createdUsername = await User.findOne({ username: username })
         if (createdUsername)
             return res.status(400).json({ msg: "Sorry, username already exists." })
 
@@ -53,7 +54,7 @@ user.post('/register', async (req, res) => {
     }
 })
 
-router.post('/login', async (req, res) => {
+user.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body
     //validation of email and password for logged in user
@@ -62,7 +63,7 @@ router.post('/login', async (req, res) => {
         msg: "Incomplete field."
     })
 
-    const user = await Uswer.findone({ email: email })
+    const user = await User.findOne({ email: email })
     if (!user)
     return res.status(400).json({ msg: "No account with this email exists."})
 
@@ -81,7 +82,7 @@ router.post('/login', async (req, res) => {
 }
 })
 
-router.delete("/delete", auth, async (req, res) => {
+user.delete("/delete", auth, async (req, res) => {
     try {
       const deletedUser = await User.findByIdAndDelete(req.user);
       res.json(deletedUser);
@@ -90,7 +91,7 @@ router.delete("/delete", auth, async (req, res) => {
     }
   });
 
-  router.post("/tokenIsValid", async (req, res) => {
+  user.post("/tokenIsValid", async (req, res) => {
     try {
       const token = req.header("x-auth-token");
       if (!token) return res.json(false);
@@ -107,7 +108,7 @@ router.delete("/delete", auth, async (req, res) => {
     }
   });
   
-  router.get("/", auth, async (req, res) => {
+  user.get("/", auth, async (req, res) => {
     const user = await User.findById(req.user);
     res.json({
       displayName: user.displayName,
