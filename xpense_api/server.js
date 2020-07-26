@@ -14,7 +14,15 @@ mongoose.connection.on('error', err => console.log(err.message + ' is Mongod not
 mongoose.connection.on('disconnected', () => console.log('mongo disconnected'))
 
 //Database Connection
+<<<<<<< HEAD
 mongoose.connect(mongodbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true,})
+=======
+mongoose.connect('mongodb://localhost:27017/xpense', { 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+})
+>>>>>>> 751fa715e57e53dd907338ce69a9426b76069759
 mongoose.connection.once('open', ()=>{
     console.log('connected to mongoose...')
 })
@@ -28,23 +36,23 @@ app.use(
     saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
   })
 )
-const whitelist = ['http://localhost:3000']
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) >= 0) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-app.use(cors(corsOptions))
+// const whitelist = ['http://localhost:3000']
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) >= 0) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
+// app.use(cors(corsOptions))
 
 //Controller/Routes
 const budgetsController = require("./controllers/budget.js");
 app.use("/budgets", budgetsController);
 
-const userController = require('./controllers/user.js')
+const userController = require('./controllers/userRouter.js')
 app.use('/user', userController)
 
 
