@@ -7,6 +7,8 @@ const budget = require("../models/budget.js");
 // const budgetSeed = require("../models/budget_seed.js")
 
 //ROUTES
+
+//Get route
 budgets.get("/", (req, res) => {
     Budget.find({}, (err, foundBudgets) => {
         if (err) {
@@ -48,7 +50,7 @@ budgets.post("/", (req, res) => {
 
 //update budget value
 budgets.put('/:id', (req, res) => {
-    Budget.findByIdAndUpdate(req.params.id, {$set: {budget: req.body}}, (err, updatedBudget) => {
+    Budget.findByIdAndUpdate(req.params.id, {$set: req.body}, (err, updatedBudget) => {
         if (err) {
             res.status(400).json({ error: err.message })
         }
