@@ -51,6 +51,16 @@ budgets.put("/:category", async (req, res) => {
     res.status(200).json(foundBudget);
 });
 
+//update budget value
+budgets.put('/:id', (req, res) => {
+    Budget.findByIdAndUpdate(req.params.id, req.body, (err, updatedHoliday) => {
+      if (err) {
+        res.status(400).json({ error: err.message })
+      }
+      res.status(200).json(updatedHoliday)
+    })
+  })
+
 budgets.delete("/:id", (req, res) => {
     Budget.findByIdAndDelete(req.params.id, (err, deletedBudget) => {
         if (err) {
