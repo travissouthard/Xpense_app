@@ -16,6 +16,7 @@ budgets.get("/", (req, res) => {
     });
 });
 
+//Seed value for road trip presets
 budgets.get("/seed", (req, res) => {
     let categoryNames = ["Gas", "Food", "Lodging", "Entertainment", "Shopping", "Car rental", "Misc.",];
     let categories = [];
@@ -35,6 +36,7 @@ budgets.get("/seed", (req, res) => {
     })
 })
 
+//Create new budget category
 budgets.post("/", (req, res) => {
     Budget.create(req.body, (err, createdBudget) => {
         if (err) {
@@ -54,11 +56,11 @@ budgets.put("/:category", async (req, res) => {
 
 //update budget value
 budgets.put('/:id', (req, res) => {
-    Budget.findByIdAndUpdate(req.params.id, req.body, (err, updatedHoliday) => {
+    Budget.findByIdAndUpdate(req.params.id, {$set: {budget: req.body}}, (err, updatedBudget) => {
         if (err) {
             res.status(400).json({ error: err.message })
         }
-        res.status(200).json(updatedHoliday)
+        res.status(200).json(updatedBudget);
     })
 })
 
@@ -70,6 +72,7 @@ budgets.put("/:category/:index", async (req, res) => {
     res.status(200).json(foundBudget);
 })
 
+//delete budget category
 budgets.delete("/:id", (req, res) => {
     Budget.findByIdAndDelete(req.params.id, (err, deletedBudget) => {
         if (err) {
