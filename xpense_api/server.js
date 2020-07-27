@@ -5,7 +5,7 @@ const cors = require('cors')
 const app = express();
 const PORT = process.env.PORT || 3003
 
-const mongodbURI = process.env.MONGODBURI || 'mongodb://localhost:27017/xpense'
+const mongodbURI = process.env.MONGODBURI || 'mongodb://localhost:27017/xpense' 
 console.log(mongodbURI)
 require('dotenv').config()
 
@@ -14,15 +14,11 @@ mongoose.connection.on('error', err => console.log(err.message + ' is Mongod not
 mongoose.connection.on('disconnected', () => console.log('mongo disconnected'))
 
 //Database Connection
-<<<<<<< HEAD
-mongoose.connect(mongodbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true,})
-=======
 mongoose.connect('mongodb://localhost:27017/xpense', { 
   useNewUrlParser: true, 
   useUnifiedTopology: true,
   useCreateIndex: true,
 })
->>>>>>> 751fa715e57e53dd907338ce69a9426b76069759
 mongoose.connection.once('open', ()=>{
     console.log('connected to mongoose...')
 })
