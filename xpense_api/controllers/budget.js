@@ -46,14 +46,6 @@ budgets.post("/", (req, res) => {
     });
 });
 
-//Add transaction route
-budgets.put("/:category", async (req, res) => {
-    let foundBudget = await Budget.findOne({title: req.params.category});
-    foundBudget.transactions.push(req.body);
-    await foundBudget.save();
-    res.status(200).json(foundBudget);
-});
-
 //update budget value
 budgets.put('/:id', (req, res) => {
     Budget.findByIdAndUpdate(req.params.id, {$set: {budget: req.body}}, (err, updatedBudget) => {
@@ -63,6 +55,14 @@ budgets.put('/:id', (req, res) => {
         res.status(200).json(updatedBudget);
     })
 })
+
+//Add transaction route
+budgets.put("/:category", async (req, res) => {
+    let foundBudget = await Budget.findOne({title: req.params.category});
+    foundBudget.transactions.push(req.body);
+    await foundBudget.save();
+    res.status(200).json(foundBudget);
+});
 
 //delete transactions
 budgets.put("/:category/:index", async (req, res) => {
