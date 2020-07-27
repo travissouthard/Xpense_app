@@ -59,7 +59,7 @@ budgets.put('/:id', (req, res) => {
 })
 
 //Add transaction route
-budgets.put("/:category", async (req, res) => {
+budgets.put("/transaction/:category", async (req, res) => {
     let foundBudget = await Budget.findOne({title: req.params.category});
     foundBudget.transactions.push(req.body);
     await foundBudget.save();
