@@ -1,3 +1,4 @@
+//middleware for verifying the token...
 const jwt = require("jsonwebtoken");
 
 const auth = (req, res, next) => {

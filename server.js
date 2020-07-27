@@ -5,7 +5,11 @@ const cors = require('cors')
 const app = express();
 const PORT = process.env.PORT || 3003
 
+<<<<<<< HEAD:xpense_api/server.js
 const mongodbURI = process.env.MONGODBURI || 'mongodb://localhost:27017/xpense' 
+=======
+const mongodbURI = process.env.MONGODBURI || 'mongodb://localhost:27017/xpense'
+>>>>>>> 1364ab35ce6d8d3bc91d3d12eb5aa9227153b228:server.js
 console.log(mongodbURI)
 require('dotenv').config()
 
@@ -14,7 +18,7 @@ mongoose.connection.on('error', err => console.log(err.message + ' is Mongod not
 mongoose.connection.on('disconnected', () => console.log('mongo disconnected'))
 
 //Database Connection
-mongoose.connect('mongodb://localhost:27017/xpense', { 
+mongoose.connect(mongodbURI, { 
   useNewUrlParser: true, 
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -32,6 +36,7 @@ app.use(
     saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
   })
 )
+<<<<<<< HEAD:xpense_api/server.js
 const whitelist = ['http://localhost:3000']
 const corsOptions = {
   origin: function (origin, callback) {
@@ -44,6 +49,20 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
+=======
+// const whitelist = ['http://localhost:3000']
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) >= 0) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
+//app.use(cors(corsOptions))
+app.use(cors())
+>>>>>>> 1364ab35ce6d8d3bc91d3d12eb5aa9227153b228:server.js
 //Controller/Routes
 const budgetsController = require("./controllers/budget.js");
 app.use("/budgets", budgetsController);
