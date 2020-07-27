@@ -2,7 +2,8 @@
 const express = require("express");
 const budgets = express.Router();
 
-const Budget = require("../models/budget.js")
+const Budget = require("../models/budget.js");
+const budget = require("../models/budget.js");
 // const budgetSeed = require("../models/budget_seed.js")
 
 //ROUTES
@@ -54,12 +55,20 @@ budgets.put("/:category", async (req, res) => {
 //update budget value
 budgets.put('/:id', (req, res) => {
     Budget.findByIdAndUpdate(req.params.id, req.body, (err, updatedHoliday) => {
-      if (err) {
-        res.status(400).json({ error: err.message })
-      }
-      res.status(200).json(updatedHoliday)
+        if (err) {
+            res.status(400).json({ error: err.message })
+        }
+        res.status(200).json(updatedHoliday)
     })
-  })
+})
+
+//delete transactions
+budgets.put("/:category/:index", async (req, res) => {
+    let foundBudget = await Budget.findOne({title: req.params.category});
+    foundBudget.transactions.splice(req.params.index, 1);
+    await foundBudget.save();
+    res.status(200).json(foundBudget);
+})
 
 budgets.delete("/:id", (req, res) => {
     Budget.findByIdAndDelete(req.params.id, (err, deletedBudget) => {
