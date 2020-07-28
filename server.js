@@ -45,11 +45,13 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
+app.options('*', function (req,res) { res.sendStatus(200); });
+
 //For allowing all headers to avoid preflight CORS problems
-app.all((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://xpensefrontend.herokuapp.com');
-  next();
-});
+// app.all((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'https://xpensefrontend.herokuapp.com');
+//   next();
+// });
 
 //Controller/Routes
 const budgetsController = require("./controllers/budget.js");
