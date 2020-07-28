@@ -33,7 +33,7 @@ app.use(
   })
 )
 
-const whitelist = ['http://localhost:3000', 'https://xpensefrontend.herokuapp.com', "https://xpensefrontend.herokuapp.com"];
+const whitelist = ['http://localhost:3000', 'https://xpensefrontend.herokuapp.com'];
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) >= 0) {
@@ -48,7 +48,7 @@ app.use(cors(corsOptions))
 // app.options('*', function (req,res) { res.sendStatus(200); });
 
 // For allowing all headers to avoid preflight CORS problems
-app.all((req, res, next) => {
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
 });
