@@ -45,11 +45,11 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
-app.options('*', function (req,res) { res.sendStatus(200); });
+// app.options('*', function (req,res) { res.sendStatus(200); });
 
 // For allowing all headers to avoid preflight CORS problems
 app.all((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://xpensefrontend.herokuapp.com');
+  res.header('Access-Control-Allow-Origin', '*');
   next();
 });
 
