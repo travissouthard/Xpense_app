@@ -33,17 +33,17 @@ app.use(
   })
 )
 
-// const whitelist = ['http://localhost:3000', 'https://xpensefrontend.herokuapp.com/', "https://xpensefrontend.herokuapp.com"];
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) >= 0) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error('Not allowed by CORS'))
-//     }
-//   }
-// }
-// app.use(cors(corsOptions))
+const whitelist = ['http://localhost:3000', 'https://xpensefrontend.herokuapp.com/', "https://xpensefrontend.herokuapp.com"];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) >= 0) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+app.use(cors(corsOptions))
 
 //For allowing all headers to avoid preflight CORS problems
 app.all((req, res, next) => {
