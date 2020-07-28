@@ -33,6 +33,12 @@ app.use(
   })
 )
 
+// For allowing all headers to avoid preflight CORS problems
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 const whitelist = ['http://localhost:3000', 'https://xpensefrontend.herokuapp.com'];
 const corsOptions = {
   origin: function (origin, callback) {
@@ -46,12 +52,6 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 // app.options('*', function (req,res) { res.sendStatus(200); });
-
-// For allowing all headers to avoid preflight CORS problems
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
 
 //Controller/Routes
 const budgetsController = require("./controllers/budget.js");
