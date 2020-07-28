@@ -32,18 +32,18 @@ app.use(
     saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
   })
 )
-// const whitelist = ['http://localhost:3000']
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) >= 0) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error('Not allowed by CORS'))
-//     }
-//   }
-// }
-//app.use(cors(corsOptions))
-app.use(cors())
+const whitelist = ['http://localhost:3000']
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) >= 0) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+app.use(cors(corsOptions))
+
 //Controller/Routes
 const budgetsController = require("./controllers/budget.js");
 app.use("/budgets", budgetsController);
@@ -51,9 +51,7 @@ app.use("/budgets", budgetsController);
 const userController = require('./controllers/userRouter.js')
 app.use('/user', userController)
 
-
 app.get('/', (req, res) => {
-  console.log("Oh hey! I got a request. Let me respond with something");
   res.redirect('/budgets');
 });
 
