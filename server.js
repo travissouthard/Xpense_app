@@ -32,6 +32,7 @@ app.use(
     saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
   })
 )
+
 const whitelist = ['http://localhost:3000', 'https://xpensefrontend.herokuapp.com/', "https://xpensefrontend.herokuapp.com"];
 const corsOptions = {
   origin: function (origin, callback) {
