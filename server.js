@@ -47,7 +47,8 @@ const corsOptions = {
     } else {
       callback(new Error('Not allowed by CORS'))
     }
-  }
+  }, 
+  "Access-Control-Allow-Origin": "*",
 }
 app.use(cors(corsOptions))
 
