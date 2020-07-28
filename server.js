@@ -42,13 +42,13 @@ app.use((req, res, next) => {
 const whitelist = ['http://localhost:3000', 'https://xpensefrontend.herokuapp.com'];
 const corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) >= 0) {
+    if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))
     }
   }, 
-  "Access-Control-Allow-Origin": "*",
+  // "Access-Control-Allow-Origin": "*",
 }
 app.use(cors(corsOptions))
 
